@@ -280,7 +280,8 @@ func getUserAlbums(userID string) ([]AlbumInfo, error) {
 		dirInfo, err := os.Stat(albumDir)
 		var createdAt time.Time
 		if err == nil {
-			createdAt = dirInfo.ModTime()
+			// Всегда отображаем время в МСК (+3), так как сервер обычно в UTC
+			createdAt = dirInfo.ModTime().UTC().Add(3 * time.Hour)
 		}
 
 		// Подсчет количества изображений

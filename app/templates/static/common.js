@@ -551,10 +551,14 @@ function initSecretHUD() {
     await new Promise(r => setTimeout(r, 400));
 
     // 2. Вывод времени МСК
-    const mskTime = new Date(new Date().getTime() + (new Date().getTimezoneOffset() * 60000) + (3 * 3600000));
-    const timeStr = mskTime.toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    const mskTimeStr = new Date().toLocaleTimeString('ru-RU', {
+      timeZone: 'Europe/Moscow',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit'
+    });
 
-    inputText.innerHTML = `<span id="msk-time-display">${timeStr} (MSK)</span>`;
+    inputText.innerHTML = `<span id="msk-time-display">${mskTimeStr} (MSK)</span>`;
 
     await new Promise(r => setTimeout(r, 600));
 
