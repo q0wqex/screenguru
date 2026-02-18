@@ -28,14 +28,16 @@ description: Оптимизированный процесс релиза для
    ```
 
 ### 3. Публикация на GitHub
-1. **Generate Notes:** Сгенерировать технические примечания к релизу.
+1. **Release Notes:** Сформировать описание (из `RELEASES.md` + Git Log) и создать релиз.
    ```powershell
-   $prevTag = git describe --tags --abbrev=0 HEAD^ 2>$null; if ($prevTag) { $range = "$prevTag..HEAD" } else { $range = "HEAD" }; git log $range --oneline --pretty=format:"- %s" | Out-File -FilePath "RELEASENOTES.tmp" -Encoding utf8
-   ```
-2. **Create Release:** Создать релиз на основе сгенерированного файла.
-   ```bash
-   gh release create {vX.X.X} --title "{vX.X.X}" --notes-file RELEASENOTES.tmp
-   rm RELEASENOTES.tmp
+   $notes = (Get-Content RELEASES.md -Raw -Encoding UTF8 | Select-String -Pattern '(?s)##\s+\[.*?\].*?(?=##\s+\[|$)').Matches[0].Value;
+   $prevTag = git describe --tags --abbrev=0 HEAD^ 2>$null;
+   $range = if ($prevTag) { "$prevTag..HEAD" } else { "HEAD" };
+   $commits = git log $range --pretty=format:"* %h %s";
+   $fullNotes = "$notes`n`n### 🛠 Commits`n$commits";
+   [System.IO.File]::WriteAllText("RELEASENOTES.tmp", $fullNotes, (New-Object System.Text.UTF8Encoding $false));
+   gh release create {vX.X.X} --title "{vX.X.X}" --notes-file RELEASENOTES.tmp;
+   Remove-Item RELEASENOTES.tmp
    ```
 
 ### 4. Синхронизация Dev (ВАЖНО)
@@ -47,4 +49,6 @@ description: Оптимизированный процесс релиза для
    ```
 
 ---
-**Примечание:** `changelog.md` теперь используется только для отображения важных изменений пользователям в интерфейсе. Технические детали релиза на GitHub генерируются автоматически из Git-истории.
+**Примечание:**
+- `changelog.md`: Только для пользователей (красиво, кратко). Тянется в UI сайта.
+- `RELEASES.md`: Технический лог. Используется для формирования Release Notes на GitHub (+ авто-список коммитов).
