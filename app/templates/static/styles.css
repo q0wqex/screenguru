@@ -690,55 +690,11 @@ input[type="file"] {
 }
 
 .kangaroo-loader {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-  margin: 0 auto 40px;
-  width: 80px;
-  height: 80px;
-}
-
-.kangaroo-emoji {
-  font-size: 60px;
-  display: inline-block;
-  animation: kangaroo-jump 0.6s ease-in-out infinite alternate;
-  z-index: 2;
-}
-
-.kangaroo-shadow {
-  width: 40px;
-  height: 6px;
-  background: rgba(0, 0, 0, 0.2);
-  border-radius: 50%;
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  animation: shadow-scale 0.6s ease-in-out infinite alternate;
-  filter: blur(2px);
-}
-
-@keyframes kangaroo-jump {
-  from {
-    transform: translateY(0) scaleX(1.1) scaleY(0.9);
-  }
-
-  to {
-    transform: translateY(-35px) scaleX(0.9) scaleY(1.1) rotate(-5deg);
-  }
-}
-
-@keyframes shadow-scale {
-  from {
-    transform: translateX(-50%) scale(1.2);
-    opacity: 0.3;
-  }
-
-  to {
-    transform: translateX(-50%) scale(0.6);
-    opacity: 0.1;
-  }
+  width: 120px;
+  height: 120px;
+  background: url('/static/loader.gif') no-repeat center center;
+  background-size: contain;
+  margin: 0 auto 30px;
 }
 
 
