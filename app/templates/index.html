@@ -15,7 +15,7 @@
 
   <!-- SEO Open Graph -->
   <meta property="og:title" content="Скрингуру — хостинг изображений">
-  <meta property="og:description" content="твой любимый сервис для хранения картинок с эффектом стеклянного дизайна.">
+  <meta property="og:description" content="Твой любимый сервис для хранения картинок с эффектом стеклянного дизайна.">
   <meta property="og:image" content="https://screengu.ru/static/og-image.svg">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Скрингуру">
@@ -44,13 +44,13 @@
         <div class="promo-title"><span class="q-red">q</span><span class="ray-white">Ray</span><span
             class="vpn-red">VPN</span></div>
         <div class="promo-subtitle">
-          быстрый, стабильный и безопасный доступ
+          Быстрый, стабильный и безопасный доступ
           <span class="free-badge">есть бесплатный тариф</span>
         </div>
       </div>
     </div>
     <a href="https://t.me/q0wqexrayBot?start=ad_0ZZEM7LL" class="promo-btn" target="_blank">
-      <span>подключиться</span>
+      <span>Подключиться</span>
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
         stroke-linecap="round" stroke-linejoin="round">
         <line x1="7" y1="17" x2="17" y2="7"></line>
@@ -63,9 +63,9 @@
     <h1><img src="/static/logo.svg" alt=""
         style="width: 48px; height: 48px; vertical-align: middle; margin-right: 10px;">Скрингуру</h1>
     <div class="header-actions">
-      <p>живой, даже когда лежит</p>
+      <p>Живой, даже когда лежит</p>
       <div>
-        <button type="button" class="delete-btn" onclick="deleteUser()">удалить профиль</button>
+        <button type="button" class="delete-btn" onclick="deleteUser()">Удалить профиль</button>
       </div>
     </div>
 
@@ -81,7 +81,7 @@
             <path d="M9 15L12 12 15 15"></path>
           </svg>
         </div>
-        <div class="upload-text">перетащите изображения сюда</div>
+        <div class="upload-text">Перетащите изображения сюда</div>
         <div class="upload-hint">или нажмите для выбора файлов</div>
       </div>
       <form action="/upload" method="post" enctype="multipart/form-data" id="uploadForm">
@@ -96,7 +96,7 @@
           <div class="kangaroo-emoji">🦘</div>
           <div class="kangaroo-shadow"></div>
         </div>
-        <div class="upload-status" id="uploadStatus">загрузка...</div>
+        <div class="upload-status" id="uploadStatus">Загрузка...</div>
         <div class="upload-count" id="uploadCount"></div>
       </div>
     </div>
@@ -104,7 +104,7 @@
     <!-- Список существующих альбомов -->
     {{if .HasAlbums}}
     <div class="albums-container">
-      <div class="albums-title">ваши альбомы под защитой (нет)</div>
+      <div class="albums-title">Ваши альбомы под защитой (нет)</div>
       <div class="albums-list">
         {{range .Albums}}
         <a href="/{{$.SessionID}}/{{.ID}}" class="album-link album-link-block">
@@ -125,13 +125,13 @@
   <div id="changelogModal" class="changelog-modal">
     <div class="changelog-content">
       <div class="changelog-header">
-        <h2>что нового?</h2>
+        <h2>Что нового?</h2>
       </div>
       <div class="changelog-body" id="changelogBody">
         <!-- Содержимое загрузится через JS -->
       </div>
       <div class="changelog-footer">
-        <button class="close-changelog-btn" onclick="closeChangelog()">круто!</button>
+        <button class="close-changelog-btn" onclick="closeChangelog()">Круто!</button>
       </div>
     </div>
   </div>
@@ -139,13 +139,13 @@
   <footer class="footer">
     <div class="footer-theme-selector">
       <select id="themeSelect" class="theme-select" onchange="changeTheme(this.value)">
-        <option value="crystal">💎 кристалл</option>
-        <option value="simple">⚡ простая</option>
-        <option value="midnight">🌙 полночь</option>
-        <option value="sunset">🌅 закат</option>
+        <option value="crystal">Кристалл</option>
+        <option value="simple">Простая</option>
+        <option value="midnight">Полночь</option>
+        <option value="sunset">Закат</option>
       </select>
     </div>
-    <p>всего изображений на сервисе: {{.TotalImageCount}}</p>
+    <p>Всего изображений на сервисе: {{.TotalImageCount}}</p>
     <div class="footer-social-links">
       <a href="https://t.me/q0wqex" class="social-badge telegram" target="_blank">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -153,7 +153,7 @@
           <path d="m22 2-7 20-4-9-9-4Z" />
           <path d="M22 2 11 13" />
         </svg>
-        <span>q0wqex</span>
+        <span>Telegram</span>
       </a>
       <a href="https://github.com/q0wqex/screenguru" class="social-badge github" target="_blank">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -165,14 +165,14 @@
         <span>GitHub</span>
       </a>
     </div>
-    <p>CREATED WITH <span class="heart-emoji">❤️</span> BY q0wqex</p>
-    <p>DESIGN INSPIRED BY <a href="https://remna.st/"
-        style="color:var(--accent-color); text-decoration:none; opacity:0.8;">REMNAWAVE</a></p>
+    <p>created with <span class="heart-emoji">❤️</span> by q0wqex</p>
+    <p>design inspired by <a href="https://remna.st/"
+        style="color:var(--accent-color); text-decoration:none; opacity:0.8;">Remnawave</a></p>
   </footer>
 
 
 
-  <script src="/static/common.js?v=1.0.0" defer></script>
+  <script src="/static/common.js?v=1.1.5" defer></script>
 </body>
 
 </html>
