@@ -1,4 +1,7 @@
 screengu.ru {
+    header {
+        Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+    }
 
     request_body {
         max_size 10MB
@@ -7,7 +10,14 @@ screengu.ru {
     reverse_proxy localhost:8000
 }
 
+www.screengu.ru {
+    redir https://screengu.ru{uri} 308
+}
+
 dev.screengu.ru {
+    header {
+        Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+    }
 
     request_body {
         max_size 10MB

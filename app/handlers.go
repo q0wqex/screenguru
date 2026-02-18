@@ -403,20 +403,15 @@ func renderTemplate(w http.ResponseWriter, name string, data interface{}) error 
 
 // sitemapHandler генерирует sitemap.xml
 func sitemapHandler(w http.ResponseWriter, r *http.Request) {
-	host := r.Host
-	scheme := "http"
-	if r.TLS != nil || r.Header.Get("X-Forwarded-Proto") == "https" {
-		scheme = "https"
-	}
-
 	w.Header().Set("Content-Type", "application/xml")
+	// Всегда используем https и основной домен для sitemap
 	fmt.Fprintf(w, `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>%s://%s/</loc>
+    <loc>https://screengu.ru/</loc>
     <lastmod>%s</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
-</urlset>`, scheme, host, time.Now().Format("2006-01-02"))
+</urlset>`, time.Now().Format("2006-01-02"))
 }
