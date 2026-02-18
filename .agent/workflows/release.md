@@ -28,9 +28,14 @@ description: Оптимизированный процесс релиза для
    ```
 
 ### 3. Публикация на GitHub
-1. **Release Notes:** Сгенерировать технические примечания к релизу на основе логов коммитов между тегами и создать релиз.
+1. **Generate Notes:** Сгенерировать технические примечания к релизу.
    ```powershell
-   $prevTag = (git tag --sort=-v:refname | Select-Object -Index 1); git log "$prevTag..HEAD" --oneline --pretty=format:"- %s" | Out-File -FilePath "RELEASENOTES.tmp" -Encoding utf8; gh release create {vX.X.X} --title "{vX.X.X}" --notes-file RELEASENOTES.tmp; Remove-Item RELEASENOTES.tmp
+   $prevTag = git describe --tags --abbrev=0 HEAD^ 2>$null; if ($prevTag) { $range = "$prevTag..HEAD" } else { $range = "HEAD" }; git log $range --oneline --pretty=format:"- %s" | Out-File -FilePath "RELEASENOTES.tmp" -Encoding utf8
+   ```
+2. **Create Release:** Создать релиз на основе сгенерированного файла.
+   ```bash
+   gh release create {vX.X.X} --title "{vX.X.X}" --notes-file RELEASENOTES.tmp
+   rm RELEASENOTES.tmp
    ```
 
 ### 4. Синхронизация Dev (ВАЖНО)
