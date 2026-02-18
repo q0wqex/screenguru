@@ -1,0 +1,25 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#161b23" />
+  
+  <!-- Kangaroo Emoji -->
+  <text x="500" y="300" font-size="280" text-anchor="middle" dominant-baseline="middle">🦘</text>
+  
+  <!-- F8 Key -->
+  <g transform="translate(620, 180)">
+    <rect x="0" y="0" width="120" height="120" rx="15" fill="#2d333b" stroke="#444c56" stroke-width="4" />
+    <path d="M10,10 L110,10 L110,110 L10,110 Z" fill="rgba(255,255,255,0.05)" />
+    <text x="60" y="75" font-family="Montserrat, sans-serif" font-weight="bold" font-size="48" fill="white" text-anchor="middle">F8</text>
+  </g>
+  
+  <!-- Domain Text -->
+  <text x="50%" y="540" font-family="Montserrat, sans-serif" font-weight="bold" font-size="80" fill="white" text-anchor="middle" letter-spacing="4">screengu.ru</text>
+  
+  <!-- Subtle Gradients/Glow -->
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#22d3ee;stop-opacity:0.1" />
+      <stop offset="100%" style="stop-color:#22d3ee;stop-opacity:0" />
+    </radialGradient>
+  </defs>
+  <circle cx="600" cy="315" r="400" fill="url(#glow)" />
+</svg>
