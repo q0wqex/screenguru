@@ -1227,3 +1227,91 @@ input[type="file"] {
   margin-bottom: 16px;
   border: 1px solid rgba(34, 211, 238, 0.2);
 }
+
+
+/* Эффект вспышки скриншота */
+.screenshot-flash {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #fff;
+  z-index: 20000;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.screenshot-flash.active {
+  animation: flash-anim 0.5s ease-out forwards;
+}
+
+@keyframes flash-anim {
+  0% {
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Псевдо-чат консоль */
+.pseudo-chat {
+  position: fixed;
+  bottom: 40px;
+  left: 20px;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(10px);
+  padding: 10px 15px;
+  border-radius: 8px;
+  color: #fff;
+  font-family: 'monospace';
+  font-size: 14px;
+  z-index: 15000;
+  display: none;
+  min-width: 200px;
+  border-left: 3px solid var(--accent-color);
+  animation: slide-in-chat 0.3s ease-out;
+}
+
+@keyframes slide-in-chat {
+  from {
+    transform: translateX(-50px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.chat-prefix {
+  color: var(--accent-color);
+  margin-right: 5px;
+}
+
+.typing-cursor {
+  display: inline-block;
+  width: 8px;
+  height: 15px;
+  background: #fff;
+  margin-left: 2px;
+  animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+#msk-time-display {
+  color: #fff;
+  font-weight: bold;
+}

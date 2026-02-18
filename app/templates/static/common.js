@@ -507,6 +507,73 @@ function closeChangelog() {
 document.addEventListener('DOMContentLoaded', function () {
   // Вызываем проверку ченджлога через небольшую задержку для плавности
   setTimeout(checkChangelog, 1000);
+
+  // Инициализация секретного HUD
+  initSecretHUD();
 });
 
+// Секретный интерактив на F8
+function initSecretHUD() {
+  // 1. Создание элементов
+  const flash = document.createElement('div');
+  flash.className = 'screenshot-flash';
 
+  const chat = document.createElement('div');
+  chat.className = 'pseudo-chat';
+  chat.innerHTML = `<span class="chat-prefix">></span><span id="chat-input-text"></span><span class="typing-cursor"></span>`;
+
+  document.body.appendChild(flash);
+  document.body.appendChild(chat);
+
+  let isRunning = false;
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'F8' && !isRunning) {
+      e.preventDefault();
+      runSecretFlow();
+    }
+  });
+
+  async function runSecretFlow() {
+    isRunning = true;
+
+    // 1. Показываем чат
+    chat.style.display = 'block';
+    const inputText = document.getElementById('chat-input-text');
+    inputText.textContent = '';
+
+    const command = '/время';
+    for (let i = 0; i < command.length; i++) {
+      await new Promise(r => setTimeout(r, 100)); // Тайпинг
+      inputText.textContent += command[i];
+    }
+
+    await new Promise(r => setTimeout(r, 400));
+
+    // 2. Вывод времени МСК
+    const mskTime = new Date(new Date().getTime() + (new Date().getTimezoneOffset() * 60000) + (3 * 3600000));
+    const timeStr = mskTime.toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+
+    inputText.innerHTML = `<span id="msk-time-display">${timeStr} (MSK)</span>`;
+
+    await new Promise(r => setTimeout(r, 600));
+
+    // 3. Вспышка (скриншот)
+    flash.classList.add('active');
+    setTimeout(() => flash.classList.remove('active'), 500);
+
+    await new Promise(r => setTimeout(r, 600));
+
+    // 4. Выбор файлов
+    const fileInput = document.getElementById('fileInput');
+    if (fileInput) {
+      fileInput.click();
+    }
+
+    // Очистка
+    setTimeout(() => {
+      chat.style.display = 'none';
+      isRunning = false;
+    }, 2000);
+  }
+}
