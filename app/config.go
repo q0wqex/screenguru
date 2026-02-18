@@ -1,6 +1,10 @@
 package main
 
-import "time"
+import (
+	"os"
+	"strconv"
+	"time"
+)
 
 // Server configuration
 const (
@@ -17,7 +21,10 @@ const (
 	ChangelogURL   = "https://raw.githubusercontent.com/q0wqex/screenguru/main/changelog.md"
 
 	DefaultFilePerm = 0755
-	MaxFileSize     = 10 * 1024 * 1024 // 10MB
+)
+
+var (
+	MaxFileSize = int64(10 * 1024 * 1024) // 10MB default
 )
 
 // MIME types and extensions
@@ -47,7 +54,22 @@ const (
 )
 
 // Cleanup configuration
-const (
-	CleanupDuration = 720 * time.Hour // 30 days
-	CleanupInterval = 24 * time.Hour  // 24 hours
+var (
+	CleanupDuration = 720 * time.Hour // 30 days default
+	CleanupInterval = 24 * time.Hour  // 24 hours default
 )
+
+// LoadConfig loads configuration from environment variables
+func LoadConfig() {
+	if maxSizeStr := os.Getenv("MAX_FILE_SIZE_MB"); maxSizeStr != "" {
+		if size, err := strconv.ParseInt(maxSizeStr, 10, 64); err == nil {
+			MaxFileSize = size * 1024 * 1024
+		}
+	}
+
+	if cleanupHoursStr := os.Getenv("CLEANUP_DURATION_HOURS"); cleanupHoursStr != "" {
+		if hours, err := strconv.Atoi(cleanupHoursStr); err == nil {
+			CleanupDuration = time.Duration(hours) * time.Hour
+		}
+	}
+}

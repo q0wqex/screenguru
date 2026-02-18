@@ -53,6 +53,9 @@ func main() {
 
 // initializeApp инициализирует приложение
 func initializeApp() error {
+	// Загружаем конфигурацию из переменных окружения
+	LoadConfig()
+
 	// Создание директории для хранения данных
 	if err := EnsureDir(DataPath); err != nil {
 		return err
