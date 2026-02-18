@@ -32,7 +32,7 @@ description: Универсальный процесс релиза для лю�
 2. **Push тега:** `git push origin {vX.X.X}`.
 3. **Подготовка лога релиза:** Извлечь только последнюю запись из `changelog.md` с корректной кодировкой UTF-8:
    ```powershell
-   $content = Get-Content changelog.md -Raw; $notes = [regex]::Match($content, '(?s)##\s+\[.*?\].*?(?=##\s+\[|$)').Value; [System.IO.File]::WriteAllText("RELEASENOTES.tmp", $notes, [System.Text.Encoding]::UTF8)
+   $utf8NoBom = New-Object System.Text.UTF8Encoding $false; $content = Get-Content changelog.md -Raw -Encoding UTF8; $notes = [regex]::Match($content, '(?s)##\s+\[.*?\].*?(?=##\s+\[|$)').Value; [System.IO.File]::WriteAllText("RELEASENOTES.tmp", $notes, $utf8NoBom)
    ```
 4. **Release:** Создать официальный релиз на GitHub:
    ```bash
