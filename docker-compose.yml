@@ -1,0 +1,33 @@
+services:
+  screenguru:
+    image: ghcr.io/q0wqex/screenguru:main
+    hostname: screenguru
+    container_name: screenguru
+    ports:
+      - "127.0.0.1:8000:8000"
+    volumes:
+      - ./data:/data
+      - /usr/share/zoneinfo/Europe/Moscow:/etc/localtime:ro
+    restart: unless-stopped
+  dev-screenguru:
+    image: ghcr.io/q0wqex/screenguru:dev
+    hostname: dev-screenguru
+    container_name: dev-screenguru
+    ports:
+      - "127.0.0.1:8888:8000"
+    volumes:
+      - ./dev-data:/data
+      - /usr/share/zoneinfo/Europe/Moscow:/etc/localtime:ro
+    restart: unless-stopped
+
+  caddy:
+    image: caddy:latest
+    container_name: caddy
+    network_mode: host
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - ./caddy_data:/data
+      - ./caddy_config:/config
+    restart: unless-stopped
+
+

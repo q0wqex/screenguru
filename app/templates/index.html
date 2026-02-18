@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, viewport-fit=cover">
+  <title>Скрингуру — быстрый и красивый хостинг изображений</title>
+  <meta name="description"
+    content="Скрингуру — современный, быстрый и стильный сервис для хранения и публикации ваших изображений и альбомов. Полная конфиденциальность и премиальный дизайн.">
+  <meta name="keywords"
+    content="Скрингуру, screenguru, screengu.ru, хостинг изображений, хранить фото, альбомы, анонимный хостинг, быстрый хост">
+  <meta name="author" content="q0wqex">
+
+  <!-- SEO Open Graph -->
+  <meta property="og:title" content="Скрингуру — хостинг изображений">
+  <meta property="og:description" content="твой любимый сервис для хранения картинок с эффектом стеклянного дизайна.">
+  <meta property="og:image"
+    content="https://raw.githubusercontent.com/q0wqexray/q0wqexray.github.io/main/shared/logo.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Скрингуру">
+
+  <!-- Preconnect для Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- DNS prefetch для дополнительной оптимизации -->
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+  <link rel="stylesheet" href="/static/styles.css">
+  <!-- Favicon as Emoji -->
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🦘</text></svg>">
+</head>
+
+<body>
+  <!-- Blob эффекты фона -->
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+
+  <!-- Рекламный баннер VPN -->
+  <div class="promo-banner">
+    <div class="promo-content">
+      <div class="promo-icon">
+        <img src="https://raw.githubusercontent.com/q0wqexray/q0wqexray.github.io/main/shared/logo.png"
+          alt="qRayVPN Logo" class="promo-logo-img">
+      </div>
+      <div class="promo-info">
+        <div class="promo-title"><span class="q-red">q</span><span class="ray-white">Ray</span><span
+            class="vpn-red">VPN</span></div>
+        <div class="promo-subtitle">
+          быстрый, стабильный и безопасный доступ
+          <span class="free-badge">есть бесплатный тариф</span>
+        </div>
+      </div>
+    </div>
+    <a href="https://t.me/q0wqexrayBot?start=ad_0ZZEM7LL" class="promo-btn" target="_blank">
+      <span>подключиться</span>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+        stroke-linecap="round" stroke-linejoin="round">
+        <line x1="7" y1="17" x2="17" y2="7"></line>
+        <polyline points="7 7 17 7 17 17"></polyline>
+      </svg>
+    </a>
+  </div>
+
+  <div class="glass-card">
+    <h1>🦘 Скрингуру</h1>
+    <div class="header-actions">
+      <p>живой, даже когда лежит</p>
+      <div>
+        <button type="button" class="delete-btn" onclick="deleteUser()">удалить профиль</button>
+      </div>
+    </div>
+
+    <div class="upload-container">
+      <div class="upload-area" id="uploadArea">
+        <div class="upload-icon">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path
+              d="M17.5 19L17.5 19C19.4 19 21 17.4 21 15.5C21 14.1 20.2 12.8 18.9 12.3C18.4 10.4 16.7 9 14.7 9C14.1 9 13.5 9.1 13 9.4C12.1 7.4 10.2 6 8 6C5.2 6 3 8.2 3 11C3 11.5 3.1 12 3.2 12.4C1.9 13.3 1 14.8 1 16.5C1 19 3 21 5.5 21L5.5 21">
+            </path>
+            <path d="M12 12L12 21"></path>
+            <path d="M9 15L12 12 15 15"></path>
+          </svg>
+        </div>
+        <div class="upload-text">перетащите изображения сюда</div>
+        <div class="upload-hint">или нажмите для выбора файлов</div>
+      </div>
+      <form action="/upload" method="post" enctype="multipart/form-data" id="uploadForm">
+        <input type="file" name="image" accept="image/*" multiple id="fileInput">
+      </form>
+    </div>
+
+    <!-- Индикатор загрузки -->
+    <div class="upload-overlay" id="uploadOverlay">
+      <div class="upload-progress">
+        <div class="cat-loader">
+          <div class="cat-ear left"></div>
+          <div class="cat-ear right"></div>
+          <div class="cat-head">
+            <div class="cat-eyes">
+              <div class="cat-eye"></div>
+              <div class="cat-eye"></div>
+            </div>
+            <div class="cat-mouth"></div>
+          </div>
+        </div>
+        <div class="upload-status" id="uploadStatus">загрузка...</div>
+        <div class="upload-count" id="uploadCount"></div>
+      </div>
+    </div>
+
+    <!-- Список существующих альбомов -->
+    {{if .HasAlbums}}
+    <div class="albums-container">
+      <div class="albums-title">ваши альбомы под защитой (нет)</div>
+      <div class="albums-list">
+        {{range .Albums}}
+        <a href="/{{$.SessionID}}/{{.ID}}" class="album-link album-link-block">
+          <div class="album-item">
+            <div style="font-weight:bold;color:#333;">{{.Name}}</div>
+            <div class="album-count">{{.ImageCount}} изображений</div>
+            <div class="album-count">создан: {{.CreatedAt.Format "02.01.2006 15:04"}}</div>
+          </div>
+        </a>
+        {{end}}
+      </div>
+    </div>
+    {{end}}
+
+  </div> <!-- Закрывающий тег для glass-card -->
+
+  <!-- Модальное окно обновлений -->
+  <div id="changelogModal" class="changelog-modal">
+    <div class="changelog-content">
+      <div class="changelog-header">
+        <h2>что нового?</h2>
+      </div>
+      <div class="changelog-body" id="changelogBody">
+        <!-- Содержимое загрузится через JS -->
+      </div>
+      <div class="changelog-footer">
+        <button class="close-changelog-btn" onclick="closeChangelog()">круто!</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-theme-selector">
+      <select id="themeSelect" class="theme-select" onchange="changeTheme(this.value)">
+        <option value="crystal">💎 кристалл</option>
+        <option value="simple">⚡ простая</option>
+        <option value="midnight">🌙 полночь</option>
+        <option value="sunset">🌅 закат</option>
+      </select>
+    </div>
+    <p>всего изображений на сервисе: {{.TotalImageCount}}</p>
+    <div class="footer-social-links">
+      <a href="https://t.me/q0wqex" class="social-badge telegram" target="_blank">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round">
+          <path d="m22 2-7 20-4-9-9-4Z" />
+          <path d="M22 2 11 13" />
+        </svg>
+        <span>q0wqex</span>
+      </a>
+      <a href="https://github.com/q0wqex/screenguru" class="social-badge github" target="_blank">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round">
+          <path
+            d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
+          <path d="M9 18c-4.51 2-5-2-7-2" />
+        </svg>
+        <span>source code</span>
+      </a>
+    </div>
+    <p>CREATED WITH <span class="heart-emoji">❤️</span> BY Q0WQEX</p>
+    <p>DESIGN INSPIRED BY <a href="https://remna.st/"
+        style="color:var(--accent-color); text-decoration:none; opacity:0.8;">REMNAWAVE</a></p>
+  </footer>
+
+
+
+  <script src="/static/common.js?v=1.0.0" defer></script>
+</body>
+
+</html>

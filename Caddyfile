@@ -1,0 +1,17 @@
+screengu.ru {
+
+    request_body {
+        max_size 10MB
+    }
+
+    reverse_proxy localhost:8000
+}
+
+dev.screengu.ru {
+
+    request_body {
+        max_size 10MB
+    }
+
+    reverse_proxy localhost:8888
+}
