@@ -3,30 +3,35 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport"
-    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, viewport-fit=cover">
-  <title> {{.AlbumID}} — Скрингуру </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+  <title>Скрингуру — быстрый и красивый хостинг изображений</title>
   <meta name="description"
-    content="Посмотрите изображения в альбоме {{.AlbumID}} на Скрингуру. Быстрый и стильный хостинг картинок.">
-  <meta name="keywords" content="Скрингуру, screenguru, альбом {{.AlbumID}}, хостинг изображений">
-  <link rel="canonical" href="https://screengu.ru{uri}" />
+    content="Скрингуру — современный, быстрый и стильный сервис для хранения и публикации изображений и альбомов. Полная конфиденциальность и премиальный дизайн.">
 
-  <!-- SEO Open Graph -->
-  <meta property="og:title" content="Альбом {{.AlbumID}} — Скрингуру">
+  <link rel="canonical" href="https://screengu.ru/">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Скрингуру — хостинг изображений">
   <meta property="og:description"
-    content="Количество изображений: {{len .Images}}. Посмотри мои картинки на Скрингуру!">
-  <meta property="og:image" content="https://screengu.ru/static/og-image.svg">
+    content="Современный сервис для хранения и публикации изображений с премиальным дизайном.">
+  <meta property="og:image" content="https://screengu.ru/static/og-image.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="2400">
+  <meta property="og:image:height" content="1260">
   <meta property="og:type" content="website">
+  <meta property="og:url" content="https://screengu.ru/">
+  <meta property="og:site_name" content="Скрингуру">
 
-  <!-- Preconnect для Google Fonts -->
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!-- DNS prefetch для дополнительной оптимизации -->
-  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
-  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+
+  <!-- Styles -->
   <link rel="stylesheet" href="/static/styles.css">
-  <link rel="canonical" href="https://screengu.ru/{{.OwnerSessionID}}/{{.AlbumID}}">
-  <link rel="icon" href="/static/logo.svg">
 </head>
 
 <body>
@@ -229,8 +234,8 @@
         <span>GitHub</span>
       </a>
     </div>
-    <p>created with <span class="heart-emoji">❤️</span> by q0wqex</p>
-    <p>design inspired by <a href="https://remna.st/"
+    <p>CREATED WITH <span class="heart-emoji">❤️</span> BY q0wqex</p>
+    <p>DESIGN INSPIRED BY <a href="https://remna.st/"
         style="color:var(--accent-color); text-decoration:none; opacity:0.8;">Remnawave</a></p>
   </footer>
 
