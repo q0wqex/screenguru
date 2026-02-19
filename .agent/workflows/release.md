@@ -1,6 +1,7 @@
 ---
 description: Оптимизированный процесс релиза для Скрингуру (Smart & Ephemeral).
 ---
+
 // turbo-all
 
 Этот воркфлоу полагается на аналитические способности Antigravity для создания релизов без мусора.
@@ -16,9 +17,8 @@ description: Оптимизированный процесс релиза для
 3. **Approval:** Пользователь подтверждает или вносит правки через `notify_user`.
 
 ### 2. Подготовка файлов
-1. **Cleanup:** Удалить `RELEASES.md`, если он существует (мы больше не раздуваем репозиторий техническими логами).
-2. **Changelog:** Дописать новый блок изменений в начало `changelog.md`.
-3. **Commit:**
+1. **Changelog:** Дописать новый блок изменений в начало `changelog.md`.
+2. **Commit:**
    ```powershell
    git add .
    git commit -m "chore: prepare release {vX.X.X}"
@@ -26,11 +26,12 @@ description: Оптимизированный процесс релиза для
    ```
 
 ### 3. Слияние и Тегирование
-1. **Merge:**
+1. **Merge (squash):** Все коммиты из `dev` схлопываются в один чистый коммит на `main`.
    ```powershell
    git checkout main
    git pull origin main
-   git merge dev --no-ff -m "Release {vX.X.X}"
+   git merge dev --squash
+   git commit -m "Release {vX.X.X}"
    git push origin main
    ```
 2. **Tag:**
@@ -48,15 +49,16 @@ description: Оптимизированный процесс релиза для
 3. **Cleanup:** Удалить `RELEASENOTES.tmp`.
 
 ### 5. Синхронизация
-1. **Sync Dev:**
+1. **Sync Dev:** После squash-merge `dev` и `main` расходятся по истории — нужно явно смержить `main` обратно в `dev`.
    ```powershell
    git checkout dev
-   git merge main
+   git merge main --no-ff -m "chore: sync dev with main after release {vX.X.X}"
    git push origin dev
    ```
 
 ---
 **Примечание:**
 - **changelog.md**: Теперь хранит всю историю изменений для пользователей.
-- **Git History**: Является единственным источником правды для генерации логов.
-- **RELEASES.md**: Удален за ненадобностью.
+- **Git History на `main`**: Только чистые `Release vX.X.X` коммиты — один на релиз.
+- **Git History на `dev`**: Полная история со всеми `chore:` коммитами.
+- **Squash merge**: Все коммиты разработки "схлопываются" в один коммит при слиянии в `main`.
